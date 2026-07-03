@@ -3,9 +3,7 @@
 // for production builds so the local dev server keeps working at "/".
 // → Hosting at a user/org page or a custom domain (served from root)? Set
 //   NEXT_PUBLIC_BASE_PATH="" (empty) or change the fallback below to "".
-const isProd = process.env.NODE_ENV === "production";
-const isVercel = process.env.VERCEL === "1";
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? (isProd && !isVercel ? "/VPM" : "");
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
