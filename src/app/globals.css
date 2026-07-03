@@ -1,0 +1,174 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Light theme (default) ──────────────────────────────────────────────── */
+:root {
+  color-scheme: light;
+
+  --base: 249 249 247;
+  --base-950: 255 255 255;
+  --base-900: 252 252 251;
+  --base-850: 255 255 255;
+  --base-800: 246 246 244;
+  --base-750: 240 240 237;
+  --base-700: 231 231 227;
+
+  --ink: 24 24 27;
+  --ink-muted: 82 82 91;
+  --ink-faint: 120 120 130;
+  --ink-ghost: 165 165 175;
+
+  --line: rgba(17, 17, 20, 0.09);
+  --line-strong: rgba(17, 17, 20, 0.15);
+  --line-faint: rgba(17, 17, 20, 0.05);
+
+  --primary: 24 24 27;
+  --primary-fg: 250 250 250;
+
+  --overlay: 17 17 20;
+
+  --healthy: 21 128 61;
+  --warning: 180 120 10;
+  --critical: 200 40 40;
+  --thinking: 37 99 235;
+  --accent: 79 70 229;
+
+  --shadow-card: 0 1px 2px rgba(24, 24, 27, 0.04), 0 1px 3px rgba(24, 24, 27, 0.06);
+  --shadow-lift: 0 4px 14px -4px rgba(24, 24, 27, 0.1), 0 12px 32px -14px rgba(24, 24, 27, 0.14);
+
+  --text-gradient: linear-gradient(180deg, #18181b 0%, #3f3f46 100%);
+  --page-bg:
+    radial-gradient(1100px 560px at 88% -12%, rgba(79, 70, 229, 0.04), transparent 60%),
+    radial-gradient(820px 460px at -5% 0%, rgba(37, 99, 235, 0.03), transparent 55%),
+    rgb(var(--base));
+}
+
+/* ── Dark theme ─────────────────────────────────────────────────────────── */
+.dark {
+  color-scheme: dark;
+
+  --base: 10 11 13;
+  --base-950: 8 9 11;
+  --base-900: 13 14 17;
+  --base-850: 17 19 23;
+  --base-800: 22 24 29;
+  --base-750: 27 30 36;
+  --base-700: 34 38 46;
+
+  --ink: 244 245 247;
+  --ink-muted: 154 161 172;
+  --ink-faint: 100 107 118;
+  --ink-ghost: 61 67 76;
+
+  --line: rgba(255, 255, 255, 0.07);
+  --line-strong: rgba(255, 255, 255, 0.12);
+  --line-faint: rgba(255, 255, 255, 0.04);
+
+  --primary: 244 245 247;
+  --primary-fg: 12 13 15;
+
+  --overlay: 255 255 255;
+
+  --healthy: 74 222 128;
+  --warning: 251 191 36;
+  --critical: 248 113 113;
+  --thinking: 96 165 250;
+  --accent: 129 140 248;
+
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px -12px rgba(0, 0, 0, 0.5);
+  --shadow-lift: 0 2px 4px rgba(0, 0, 0, 0.4), 0 16px 40px -16px rgba(0, 0, 0, 0.6);
+
+  --text-gradient: linear-gradient(180deg, #ffffff 20%, #b6bcc7 100%);
+  --page-bg:
+    radial-gradient(1200px 600px at 80% -10%, rgba(124, 140, 248, 0.05), transparent 60%),
+    radial-gradient(900px 500px at 0% 0%, rgba(96, 165, 250, 0.035), transparent 55%),
+    rgb(var(--base));
+}
+
+* {
+  border-color: var(--line);
+}
+
+html,
+body {
+  background-color: rgb(var(--base));
+  color: rgb(var(--ink));
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "cv11", "ss01";
+  letter-spacing: -0.011em;
+}
+
+body {
+  background: var(--page-bg);
+  min-height: 100vh;
+}
+
+/* Thin, quiet scrollbars */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--overlay) / 0.14);
+  border-radius: 999px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--overlay) / 0.24);
+  background-clip: content-box;
+}
+
+@layer components {
+  .card {
+    @apply rounded-card border border-line bg-base-850 shadow-card;
+  }
+  .card-hover {
+    @apply transition-all duration-200 hover:border-line-strong hover:shadow-lift;
+  }
+  .surface {
+    @apply rounded-lg border border-line bg-base-800/70;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-line px-2.5 py-1 text-xs font-medium text-ink-muted;
+  }
+  .kbd {
+    @apply inline-flex items-center rounded-md border border-line bg-base-800 px-1.5 py-0.5 font-mono text-[10px] text-ink-faint;
+  }
+  /* Monochrome primary CTA — the anti-"AI-glow" button. */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-primary-fg transition-all hover:opacity-90 active:scale-[0.98];
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-line px-4 py-2.5 text-sm font-medium text-ink-muted transition-colors hover:border-line-strong hover:text-ink;
+  }
+  .grain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.02;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+}
+
+@layer utilities {
+  .text-gradient {
+    background: var(--text-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+  .mask-fade-r {
+    -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent);
+    mask-image: linear-gradient(90deg, #000 85%, transparent);
+  }
+}
